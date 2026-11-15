@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Control Lab · 控制理论可视化实验台</title>
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjMGIwZjE0Ii8+PGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iNyIgZmlsbD0iIzM1YzNhYiIvPjwvc3ZnPg==">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="pulse"></span>
+    <h1>Control Lab</h1>
+    <span class="tagline">控制理论可视化实验台</span>
+  </div>
+  <div class="hud">
+    <span class="hud-item" id="conn">连接中…</span>
+    <span class="hud-item"><label>t</label> <b id="clock">0.00 s</b></span>
+    <span class="hud-item"><label>单步求解</label> <b id="solver">—</b></span>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="stage">
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-title">场景</span>
+        <span class="panel-note" id="sceneLabel">—</span>
+      </div>
+      <canvas id="scene" class="canvas scene"></canvas>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-title">时序曲线</span>
+        <span class="panel-note" id="chartNote">最近 10 s</span>
+      </div>
+      <canvas id="chart" class="canvas chart"></canvas>
+    </div>
+
+    <div class="hint" id="hint">—</div>
+  </section>
+
+  <aside class="side">
+    <div class="panel">
+      <div class="panel-head"><span class="panel-title">被控对象</span></div>
+      <div class="panel-body">
+        <select id="plant" class="select"></select>
+        <p class="meta" id="plantMeta"></p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-title">控制器</span></div>
+      <div class="panel-body">
+        <div class="segmented" id="controller">
+          <button data-kind="pid">PID</button>
+          <button data-kind="lqr">LQR</button>
+          <button data-kind="mpc">MPC</button>
+        </div>
+        <div class="params" id="params"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-title">执行机构限幅</span></div>
+      <div class="panel-body">
+        <div class="row">
+          <label for="uLimit">|u| ≤ <b id="uLimitVal">2.00</b></label>
+          <input type="range" id="uLimit" min="0.5" max="10" step="0.1" value="2">
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-title">操作</span></div>
+      <div class="panel-body">
+        <div class="btn-row">
+          <button class="btn accent" id="push">施加扰动</button>
+          <button class="btn" id="reset">重置</button>
+        </div>
+        <div class="btn-row">
+          <button class="btn ghost" id="pause">暂停</button>
+          <button class="btn ghost" id="speed">1×</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-title">实时读数</span></div>
+      <div class="panel-body">
+        <table class="readout" id="readout"></table>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
